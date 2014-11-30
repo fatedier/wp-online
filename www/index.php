@@ -14,14 +14,18 @@
     if ($web_url != "")
     {
         $pageContents = HttpClient::quickGet($web_url);
-        /* 去除所有空格，查找对应文本编码，如果是gb2312就转换为utf-8*/
-        $content_temp = ereg_replace(" ", "", $pageContents);
-        $check1 = stripos($content_temp, "charset=\"gb2312\"", 0);
-        $check2 = stripos($content_temp, "charset=gb2312", 0);
         
-        if (($check1 != false) || ($check2 != false))
+        /* 查找对应文本编码，替换当前页面的charset设置 */
+        $check_pos = stripos($pageContents, "gb2312", 0);
+        
+        if ($check_pos != false)
         {
-            $charset = "gb2312";
+            $page_temp = substr($pageContents, $check_pos - 20, $check_pos);
+            $check_charset = stripos($pageContents, "charset", 0);
+            if ($check_charset != false)
+            {
+                $charset = "gb2312";
+            }
         }
     }
 ?>
