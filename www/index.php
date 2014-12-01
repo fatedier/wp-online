@@ -6,7 +6,7 @@
     $pageContents = "";
     
     /* 如果前7个字符不是 "http://"，则补上 */
-    if (substr($web_url, 0, 7) != "http://" && $web_url != "")
+    if (substr($web_url, 0, 7) != "http://" && substr($web_url, 0, 5) != "https" && $web_url != "")
     {
         $web_url = "http://".$web_url;
     }
