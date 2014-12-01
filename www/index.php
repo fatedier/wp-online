@@ -16,15 +16,25 @@
         $pageContents = HttpClient::quickGet($web_url);
         
         /* 查找对应文本编码，替换当前页面的charset设置 */
-        $check_pos = stripos($pageContents, "gb2312", 0);
-        
-        if ($check_pos != false)
+        $check_gb2312 = stripos($pageContents, "gb2312", 0);
+        $check_gbk = stripos($pageContents, "gbk", 0);
+
+        if ($check_gb2312 != false)
         {
-            $page_temp = substr($pageContents, $check_pos - 20, $check_pos);
+            $page_temp = substr($pageContents, $check_gb2312 - 20, $check_gb2312);
             $check_charset = stripos($pageContents, "charset", 0);
             if ($check_charset != false)
             {
                 $charset = "gb2312";
+            }
+        }
+        else if ($check_gbk != false)
+        {
+            $page_temp = substr($pageContents, $check_gbk - 20, $check_gbk);
+            $check_charset = stripos($pageContents, "charset", 0);
+            if ($check_charset != false)
+            {
+                $charset = "gbk";
             }
         }
     }
