@@ -1,5 +1,5 @@
 <?php
-    include 'HttpClient.class.php';
+    include dirname(__file__).'/http/HttpClient.class.php';
     
     $web_url = $_POST["web_url"];
     $charset = "utf-8";
@@ -65,7 +65,7 @@
 		/* google api方式 */
 		/*
         function generateQRfromGoogle($chl, $widhtHeight = '80', $EC_level = 'L', $margin = '0') 
-        { 
+        {
             echo '<img src="http://chart.apis.google.com/chart?chs='.$widhtHeight.'x'.$widhtHeight.'&cht=qr&chld='.$EC_level.'|'.$margin.'&chl='.$chl.'" alt="QR code" widhtHeight="'.$size.'" widhtHeight="'.$size.'"/>';
         }
         echo("<div style=\"background-color:white;font-size:18px\" align=\"center\">");
